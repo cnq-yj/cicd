@@ -1,0 +1,23 @@
+package com.example.demo.user.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+@Builder
+public class LoginResponse {
+    private UserInfo userInfo;
+    private String accessToken;
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class UserInfo {
+        private Long userId;
+        private String email;
+        private String name;
+        private String membership;
+    }
+}
