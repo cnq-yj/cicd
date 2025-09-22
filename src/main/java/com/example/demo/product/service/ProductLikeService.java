@@ -1,13 +1,11 @@
 package com.example.demo.product.service;
 
+import com.example.demo.product.entity.ProductLike;
 import com.example.demo.product.repository.ProductLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -16,15 +14,26 @@ public class ProductLikeService {
 
     private final ProductLikeRepository productLikeRepository;
 
-    public Map<Long, Boolean> getProductLike(Long userId, List<Long> productIds) {
-        List<Long> likedProductIds = productLikeRepository
-                .findActiveLikedProductIds(userId, productIds);
-        Set<Long> likedSet = new HashSet<>(likedProductIds);
+    public Map<Long, Boolean> getProductsLike(Long userId, List<Long> productIds) {
+        if (productIds == null || productIds.isEmpty()) {
+            return new HashMap<>();
+        }
+
+        List<ProductLike> likedProducts = productLikeRepository
+                .findByUserIdAndProductIdInAndIsActiveTrue(userId, productIds);
+
+        Set<Long> likedProductsSet = likedProducts.stream()
+                .map(productLike -> productLike.getProduct().getId())
+                .collect(Collectors.toSet());
 
         return productIds.stream()
                 .collect(Collectors.toMap(
                         productId -> productId,
-                        likedSet::contains
+                        likedProductsSet::contains
                 ));
+    }
+
+    public boolean getProductLike(Long userId, Long productId) {
+        return productLikeRepository.existsByUserIdAndProductIdAndIsActiveTrue(userId, productId);
     }
 }

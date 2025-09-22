@@ -30,6 +30,13 @@ public class ReviewService {
         ));
     }
 
+    public ProductReviewInfoResponse getProductReviewInfo(Long productId) {
+        return ProductReviewInfoResponse.builder()
+                .averageRating(roundRating(reviewRepository.getAverageRating(productId)))
+                .reviewCount(reviewRepository.countByProductId(productId))
+                .build();
+    }
+
     private Double roundRating(Double rating) {
         if (rating == null) return 0.0;
         return Math.round(rating * 10.0) / 10.0;

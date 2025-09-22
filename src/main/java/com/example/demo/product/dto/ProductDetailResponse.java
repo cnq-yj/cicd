@@ -9,15 +9,18 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
-public class ProductListResponse {
+public class ProductDetailResponse {
     private Long id;
     private String name;
     private String brand;
     private Integer price;
     private Integer originalPrice;
-    private String thumbnail;
+    private List<String> images;
     private String category;
     private Double rating;
     private Integer reviewCount;
     private boolean isLiked;
+    private List<String> tags;
+    private String description;
+    private List<ProductOptionResponse> options;
 }

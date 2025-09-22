@@ -11,27 +11,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Product {
+public class ProductImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @Column(name = "image_id")
     private Long id;
 
-    @Column(name = "name", length = 200)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Column(name = "brand", length = 100)
-    private String brand;
+    @Column(name = "url", nullable = false)
+    private String url;
 
-    @Column(name = "price")
-    private Integer price;
-
-    @Column(name = "original_price")
-    private Integer originalPrice;
-
-    @Column(name = "category", length = 50)
-    private String category;
+    @Column(name = "image_type", length = 50, nullable = false)
+    private String imageType;
 
     @CreationTimestamp
     @Column(name = "created_at")

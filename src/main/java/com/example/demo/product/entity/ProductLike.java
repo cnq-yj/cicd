@@ -31,7 +31,7 @@ public class ProductLike {
     private Product product;
 
     @Column(name = "is_active")
-    private Boolean isActive = true;
+    private Boolean isActive;
 
     @UpdateTimestamp
     @Column(name = "updated_at")

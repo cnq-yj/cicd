@@ -18,14 +18,17 @@ public class ProductOption  {
     @Column(name = "option_id")
     private Long id;
 
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Column(name = "size", length = 10, nullable = false)
-    private String size;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "size_id")
+    private ProductSize size;
 
-    @Column(name = "color", length = 20, nullable = false)
-    private String color;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "color_id")
+    private ProductColor color;
 
     @Column(name = "stock", nullable = false)
     private Integer stock;
@@ -33,5 +36,4 @@ public class ProductOption  {
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
 }

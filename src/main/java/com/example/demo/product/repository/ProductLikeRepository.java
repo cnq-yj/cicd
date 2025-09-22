@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ProductLikeRepository extends JpaRepository<ProductLike, Long> {
 
-    @Query("SELECT pl.product.id FROM ProductLike pl WHERE pl.user.id = :userId AND pl.product.id IN :productIds AND pl.isActive = true")
-    List<Long> findActiveLikedProductIds(@Param("userId") Long userId, @Param("productIds") List<Long> productIds);
+    List<ProductLike> findByUserIdAndProductIdInAndIsActiveTrue(Long userId, List<Long> productIds);
+
+    boolean existsByUserIdAndProductIdAndIsActiveTrue(Long userId, Long productId);
 }

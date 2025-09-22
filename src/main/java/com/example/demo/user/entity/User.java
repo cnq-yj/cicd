@@ -1,6 +1,7 @@
 package com.example.demo.user.entity;
 
 import com.example.demo.user.dto.RegisterRequest;
+import com.example.demo.user.type.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

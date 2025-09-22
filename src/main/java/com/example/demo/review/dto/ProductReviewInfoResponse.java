@@ -9,5 +9,5 @@ import lombok.Getter;
 @Builder
 public class ProductReviewInfoResponse {
     private Double averageRating;
-    private Long reviewCount;
+    private Integer reviewCount;
 }
